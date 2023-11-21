@@ -1,0 +1,44 @@
+﻿<div class="relative group w-full bg-red-50">
+    <button type="button" class="flex items-center w-full bg-blue-50 border rounded-md p-2">
+        <span class="block truncate">
+            @if (items.Count(x => x.IsChecked) == 0)
+            {
+                <span>Select items</span>
+            }
+            else
+            {
+                @foreach (var selected in items.Where(x => x.IsChecked))
+                {
+                    <span type="button" class="px-2 py-1 m-1 text-xs font-medium text-center inline-flex items-center text-gray-800 bg-blue-100 border rounded-lg hover:bg-blue-200 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 text-gray-800 me-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        @selected.Value
+                    </span>
+                }
+
+            }
+        </span>
+        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />
+            </svg>
+        </span>
+    </button>
+
+    <div class="invisible w-full group-focus-within:visible group-active:visible absolute top-[10.5] z-10 origin-top
+                rounded-md bg-white text-center py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+         tabindex="-1">
+
+        <div class="flex flex-col justify-between">
+            @foreach (var item in items)
+            {
+                <div class="flex flex-row items-center px-3 py-0.5 cursor-pointer hover:bg-gray-200 select-none">
+                    <input id="@item.Key" name="@item.Key" @bind="@item.IsChecked" type="checkbox" class="h-4 w-4 cursor-pointer rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                    <label for="@item.Key" class="ml-3 cursor-pointer block text-sm leading-6 text-gray-900">@item.Value</label>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
