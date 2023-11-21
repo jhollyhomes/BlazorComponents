@@ -21,6 +21,15 @@ public partial class MultiSelect
             new DropDownItem("RA", "Reassigned")
         };
     }
+
+    void Toggle(string key)
+    {
+        var item = items.FirstOrDefault(x => x.Key == key);
+        if (item != null)
+        {
+            item.IsChecked = !item.IsChecked;
+        }
+    }
 }
 
 public class DropDownItem(string key, string value)
