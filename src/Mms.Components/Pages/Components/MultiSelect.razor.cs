@@ -1,26 +1,11 @@
-﻿namespace Mms.Components.Pages.Components;
+﻿using Microsoft.AspNetCore.Components;
+
+namespace Mms.Components.Pages.Components;
 
 public partial class MultiSelect
 {
-    public List<DropDownItem> items { get; set; } = new();
-
-    protected override void OnInitialized()
-    {
-        GetItems();
-    }
-
-    void GetItems()
-    {
-        items = new()
-        {
-            new DropDownItem("NS", "Not started"),
-            new DropDownItem("IP", "In progress"),
-            new DropDownItem("CO", "Completed"),
-            new DropDownItem("CA", "Cancelled"),
-            new DropDownItem("OH", "On hold"),
-            new DropDownItem("RA", "Reassigned")
-        };
-    }
+    [Parameter]
+    public List<DropDownItem> items { get; set; } = default!;
 
     void Toggle(string key)
     {

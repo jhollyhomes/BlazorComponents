@@ -1,9 +1,48 @@
 ﻿@page "/"
 
-<h1 class="text-2xl font-bold underline mb-5">
-    Attempts at components
-</h1>
+<div class="mx-auto p-5">
 
-<div class="w-96">
-    <MultiSelect />
+    <h1 class="text-2xl font-bold underline ">
+        Attempts at components
+    </h1>
+
+    <div class="w-96 my-5">
+        <MultiSelect items="multiSelectItems1" />
+    </div>
+
+    <div class="w-96 my-5">
+        <MultiSelect items="multiSelectItems2" />
+    </div>
+
+    <div class="w-96 my-5">
+        <DateSelect />
+    </div>
+
+    <div class="w-96 my-5">
+        <DateSelect InitialDate="_initialDate" />
+    </div>
+
 </div>
+
+@code {
+
+    private DateOnly _initialDate = new DateOnly(2024, 6, 23);
+
+    private List<DropDownItem> multiSelectItems1 = new ()
+                                                {
+                                                    new DropDownItem("NS", "Not started"),
+                                                    new DropDownItem("IP", "In progress"),
+                                                    new DropDownItem("CO", "Completed"),
+                                                    new DropDownItem("CA", "Cancelled"),
+                                                    new DropDownItem("OH", "On hold"),
+                                                    new DropDownItem("RA", "Reassigned")
+                                                };
+
+    private List<DropDownItem> multiSelectItems2 = new()
+                                                {
+                                                    new DropDownItem("EN", "England"),
+                                                    new DropDownItem("SC", "Scotland"),
+                                                    new DropDownItem("WA", "Wales"),
+                                                    new DropDownItem("NI", "Northern Ireland"),
+                                                };
+}
