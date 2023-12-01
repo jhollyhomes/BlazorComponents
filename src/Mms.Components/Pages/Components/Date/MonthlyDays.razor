@@ -10,9 +10,18 @@
     {
         if (i >= (int)_firstDayOfMonth)
         {
-            <button class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-100">
-                @_dayInMonth
-            </button>
+            if (SelectedDate.Equals(new DateOnly(Year, Month, _dayInMonth)))
+            {
+                <button class="w-10 p-2 text-xs font-medium text-gray-500 bg-blue-100">
+                    @_dayInMonth
+                </button>
+            }
+            else
+            {
+                <button class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-200">
+                    @_dayInMonth
+                </button>
+            }
 
             _dayInMonth++;
         }
@@ -30,9 +39,20 @@
         {
             if (_dayInMonth <= _daysInMonth)
             {
-                <button class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-100">
-                    @(_dayInMonth++)
-                </button>
+                if (SelectedDate.Equals(new DateOnly(Year, Month, _dayInMonth)))
+                {
+                    <button class="w-10 p-2 text-xs font-medium text-gray-500 bg-blue-100">
+                        @_dayInMonth
+                    </button>
+                }
+                else
+                {
+                    <button class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-200">
+                        @_dayInMonth
+                    </button>
+                }
+
+                _dayInMonth++;
             }
             else
             {
@@ -50,4 +70,7 @@
 
     [Parameter]
     public int Year { get; set; }
+
+    [Parameter]
+    public DateOnly SelectedDate { get; set; }
 }
