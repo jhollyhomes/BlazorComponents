@@ -46,19 +46,17 @@
     [Parameter]
     public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
-    public int ViewMonth {get; set; }
-    public int ViewYear {get; set; }
-
-    protected override void OnParametersSet()
-    {
-        ViewMonth = Date.Month;
-        ViewYear = Date.Year;
-    }
-
+    public int ViewMonth { get; set; }
+    public int ViewYear { get; set; }
     public void DateViewUpdated(DateOnly value)
     {
         ViewMonth = value.Month;
         ViewYear = value.Year;
+    }
+    protected override void OnParametersSet()
+    {
+        ViewMonth = Date.Month;
+        ViewYear = Date.Year;
     }
 
     public void SelectedDateChanged(DateOnly value)
@@ -67,7 +65,7 @@
 
         ViewMonth = value.Month;
         ViewYear = value.Year;
-        
+
         _visible = false;
     }
 
