@@ -10,16 +10,18 @@
     {
         if (i >= (int)_firstDayOfMonth)
         {
-            if (SelectedDate.Equals(new DateOnly(Year, Month, _dayInMonth)))
+            int local_day = _dayInMonth;
+
+            if (SelectedDate.Equals(new DateOnly(Year, Month, local_day)))
             {
-                <button class="w-10 p-2 text-xs font-medium text-gray-500 bg-blue-100">
-                    @_dayInMonth
+                <button @onclick="() => SelectDayInMonth(local_day)" class="w-10 p-2 text-xs font-medium text-gray-500 bg-blue-100">
+                    @local_day
                 </button>
             }
             else
             {
-                <button class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-200">
-                    @_dayInMonth
+                <button @onclick="() => SelectDayInMonth(local_day)" class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-200">
+                    @local_day
                 </button>
             }
 
@@ -39,16 +41,18 @@
         {
             if (_dayInMonth <= _daysInMonth)
             {
-                if (SelectedDate.Equals(new DateOnly(Year, Month, _dayInMonth)))
+                int local_day = _dayInMonth;
+
+                if (SelectedDate.Equals(new DateOnly(Year, Month, local_day)))
                 {
-                    <button class="w-10 p-2 text-xs font-medium text-gray-500 bg-blue-100">
-                        @_dayInMonth
+                    <button @onclick="() => SelectDayInMonth(local_day)" class="w-10 p-2 text-xs font-medium text-gray-500 bg-blue-100">
+                        @local_day
                     </button>
                 }
                 else
                 {
-                    <button class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-200">
-                        @_dayInMonth
+                    <button @onclick="() => SelectDayInMonth(local_day)" class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-200">
+                        @local_day
                     </button>
                 }
 
@@ -62,7 +66,6 @@
     </div>
 }
 
-
 @code {
 
     [Parameter]
@@ -73,4 +76,14 @@
 
     [Parameter]
     public DateOnly SelectedDate { get; set; }
+
+    [Parameter]
+    public EventCallback<DateOnly> SelectedDateChanged { get; set; }
+
+    public async Task SelectDayInMonth(int value)
+    {
+        DateOnly newSelectedDate = new DateOnly(Year, Month, value);
+
+        await SelectedDateChanged.InvokeAsync(newSelectedDate);
+    }
 }

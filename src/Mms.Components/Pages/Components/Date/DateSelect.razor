@@ -32,7 +32,7 @@
 
                 <MonthYearSelector DateChanged="DateViewUpdated" Month="ViewMonth" Year="ViewYear" />
                 <DailyHeaders />
-                <MonthlyDays Month="ViewMonth" Year="ViewYear" SelectedDate="Date"/>
+                <DaysInMonth Month="ViewMonth" Year="ViewYear" SelectedDate="Date" SelectedDateChanged="SelectedDateChanged" />
 
             </div>
 
@@ -59,6 +59,16 @@
     {
         ViewMonth = value.Month;
         ViewYear = value.Year;
+    }
+
+    public void SelectedDateChanged(DateOnly value)
+    {
+        Date = value;
+
+        ViewMonth = value.Month;
+        ViewYear = value.Year;
+        
+        _visible = false;
     }
 
     private bool _visible = false;
