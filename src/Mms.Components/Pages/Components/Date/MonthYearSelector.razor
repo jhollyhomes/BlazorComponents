@@ -1,0 +1,72 @@
+﻿<div class="flex flex-row justify-between p-1">
+
+    <button @onclick="(() => PreviousMonth())" class="rounded-md hover:bg-gray-200">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+    </button>
+    
+    <div>
+        <span class="text-gray-600 text-sm font-medium mr-1">@(MonthName())</span><span class="text-gray-600 text-sm font-medium">@(Year.ToString())</span>
+    </div>
+
+    <button @onclick="(() => NextMonth())" class="rounded-md hover:bg-gray-200"> 
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+    </button>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public EventCallback<DateOnly> DateChanged {get; set; }
+
+    [Parameter, EditorRequired]
+    public int Month { get; set; }
+
+    [Parameter, EditorRequired]
+    public int Year { get; set; }
+
+    private string MonthName()
+    {
+        if (Month > 0 & Year > 0)
+        {
+            DateTime date = new DateTime(Year, Month, 1);
+            return date.ToString("MMMM");
+        }
+
+        return string.Empty;
+    }
+
+    private void PreviousMonth()
+    {
+        if (Month == 1)
+        {
+            Month = 12;
+            Year--;
+        }
+        else
+        {
+            Month--;
+        }
+
+        DateChanged.InvokeAsync(new DateOnly(Year, Month, 1));
+    }
+
+    private void NextMonth()
+    {
+        if (Month == 12)
+        {
+            Month = 1;
+            Year++;
+        }
+        else
+        {
+            Month++;
+        }
+
+        DateChanged.InvokeAsync(new DateOnly(Year, Month, 1));
+    }
+}

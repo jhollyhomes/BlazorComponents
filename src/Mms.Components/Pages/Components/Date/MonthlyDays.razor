@@ -1,0 +1,53 @@
+﻿@{
+    int _dayInMonth = 1;
+    DayOfWeek _firstDayOfMonth = new DateOnly(Year, Month, 1).DayOfWeek;
+    int _daysInMonth = DateTime.DaysInMonth(Year, Month);
+}
+
+<div class="flex flex-row justify-evenly my-1">
+
+    @for (int i = 0; i < 7; i++)
+    {
+        if (i >= (int)_firstDayOfMonth)
+        {
+            <button class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-100">
+                @_dayInMonth
+            </button>
+
+            _dayInMonth++;
+        }
+        else
+        {
+            <span class="w-10 p-2 text-xs font-medium text-gray-500"></span>
+        }
+    }
+</div>
+
+@while (_dayInMonth <= _daysInMonth)
+{
+    <div class="flex flex-row justify-evenly my-1">
+        @for (int i = 0; i < 7; i++)
+        {
+            if (_dayInMonth <= _daysInMonth)
+            {
+                <button class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-100">
+                    @(_dayInMonth++)
+                </button>
+            }
+            else
+            {
+                <span class="w-10 p-2 text-xs font-medium text-gray-500"></span>
+            }
+        }
+    </div>
+}
+
+
+@code {
+
+    [Parameter]
+    public int Month { get; set; }
+
+    [Parameter]
+    public int Year { get; set; }
+}
