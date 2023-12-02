@@ -4,7 +4,7 @@
     int _daysInMonth = DateTime.DaysInMonth(Year, Month);
 } 
 
-<div class="flex flex-row justify-evenly my-1">
+<div class="flex flex-row justify-evenly my-0.5">
 
     @for (int i = 0; i < 7; i++)
     {
@@ -15,14 +15,14 @@
         }
         else
         {
-            <span class="w-10 p-2 text-xs font-medium text-gray-500"></span>
+            <span class="w-10 mx-0.5 px-2 py-1 text-xs font-medium text-gray-500"></span>
         }
     }
 </div>
 
 @while (_dayInMonth <= _daysInMonth)
 {
-    <div class="flex flex-row justify-evenly my-1">
+    <div class="flex flex-row justify-evenly my-0.5">
         @for (int i = 0; i < 7; i++)
         {
             if (_dayInMonth <= _daysInMonth)
@@ -32,7 +32,7 @@
             }
             else
             {
-                <span class="w-10 p-2 text-xs font-medium text-gray-500"></span>
+                <span class="w-10 mx-0.5 px-2 py-1 text-xs font-medium text-gray-500"></span>
             }
         }
     </div>

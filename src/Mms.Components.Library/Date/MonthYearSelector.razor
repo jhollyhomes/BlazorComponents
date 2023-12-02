@@ -1,6 +1,6 @@
 ﻿<div class="flex flex-row justify-between p-1">
 
-    <button @onclick="(() => PreviousMonth())" class="rounded-md hover:bg-gray-200">
+    <button @onclick="(() => PreviousMonth())" class="rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-500">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
@@ -10,7 +10,7 @@
         <span class="text-gray-600 text-sm font-medium mr-1">@(MonthName())</span><span class="text-gray-600 text-sm font-medium">@(Year.ToString())</span>
     </div>
 
-    <button @onclick="(() => NextMonth())" class="rounded-md hover:bg-gray-200"> 
+    <button @onclick="(() => NextMonth())" class="rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-600">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
