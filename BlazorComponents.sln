@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC6A0204-809
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mms.Components", "src\Mms.Components\Mms.Components.csproj", "{B4D5419F-279A-4DC1-9B3E-72B8CD255D27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mms.Components.Library", "src\Mms.Components.Library\Mms.Components.Library.csproj", "{A59B6195-4758-4B39-AF34-8D0D9097B9E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{B4D5419F-279A-4DC1-9B3E-72B8CD255D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4D5419F-279A-4DC1-9B3E-72B8CD255D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4D5419F-279A-4DC1-9B3E-72B8CD255D27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A59B6195-4758-4B39-AF34-8D0D9097B9E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A59B6195-4758-4B39-AF34-8D0D9097B9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A59B6195-4758-4B39-AF34-8D0D9097B9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A59B6195-4758-4B39-AF34-8D0D9097B9E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B4D5419F-279A-4DC1-9B3E-72B8CD255D27} = {CC6A0204-8095-4610-8193-E9AFADACDA75}
+		{A59B6195-4758-4B39-AF34-8D0D9097B9E9} = {CC6A0204-8095-4610-8193-E9AFADACDA75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39DF2CAA-C367-4A44-9550-CB7B814CFB28}

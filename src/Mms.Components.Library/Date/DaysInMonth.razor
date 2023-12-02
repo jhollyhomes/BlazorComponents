@@ -2,7 +2,7 @@
     int _dayInMonth = 1;
     DayOfWeek _firstDayOfMonth = new DateOnly(Year, Month, 1).DayOfWeek;
     int _daysInMonth = DateTime.DaysInMonth(Year, Month);
-}
+} 
 
 <div class="flex flex-row justify-evenly my-1">
 
@@ -10,21 +10,7 @@
     {
         if (i >= (int)_firstDayOfMonth)
         {
-            int local_day = _dayInMonth;
-
-            if (SelectedDate.Equals(new DateOnly(Year, Month, local_day)))
-            {
-                <button @onclick="() => SelectDayInMonth(local_day)" class="w-10 p-2 text-xs font-medium text-gray-500 bg-blue-100">
-                    @local_day
-                </button>
-            }
-            else
-            {
-                <button @onclick="() => SelectDayInMonth(local_day)" class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-200">
-                    @local_day
-                </button>
-            }
-
+            <DayInMonth Day="_dayInMonth" Month="Month" Year="Year" SelectedDate="SelectedDate" SelectDay="SelectDayInMonth" />
             _dayInMonth++;
         }
         else
@@ -41,21 +27,7 @@
         {
             if (_dayInMonth <= _daysInMonth)
             {
-                int local_day = _dayInMonth;
-
-                if (SelectedDate.Equals(new DateOnly(Year, Month, local_day)))
-                {
-                    <button @onclick="() => SelectDayInMonth(local_day)" class="w-10 p-2 text-xs font-medium text-gray-500 bg-blue-100">
-                        @local_day
-                    </button>
-                }
-                else
-                {
-                    <button @onclick="() => SelectDayInMonth(local_day)" class="w-10 p-2 text-xs font-medium text-gray-500 hover:bg-gray-200">
-                        @local_day
-                    </button>
-                }
-
+                <DayInMonth Day="_dayInMonth" Month="Month" Year="Year" SelectedDate="SelectedDate" SelectDay="SelectDayInMonth" />
                 _dayInMonth++;
             }
             else

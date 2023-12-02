@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Mms.Components.Pages.Components.Select;
+namespace Mms.Components.Library.Select;
 
 public partial class MultiSelect
 {

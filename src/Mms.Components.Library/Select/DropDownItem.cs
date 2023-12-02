@@ -1,4 +1,4 @@
-﻿namespace Mms.Components.Pages.Components.Select;
+﻿namespace Mms.Components.Library.Select;
 
 public class DropDownItem(string key, string value)
 {
