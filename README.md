@@ -10,7 +10,7 @@ using blazor & tailwind created components for general use
 **Date picker** uses a bool field to show/hide then creates a hidden div to deal with close on button click outside.
 
 - [X] Date picker component
-- [ ] Clear date option on date picker
+- [X] Clear date option on date picker
 - [X] Move components to a component project
 - [ ] Select Month
 - [ ] Select Year to Month
