@@ -1,0 +1,53 @@
+﻿@using System.Globalization
+
+<div class="my-1"></div>
+
+@for (int j = 0; j < 10; j += 3)
+{
+    <div class="flex flex-row justify-evenly my-0.5">
+        @for (int i = 1; i <= 3; i++)
+        {
+            var month = i + j;
+            <button @onclick="() => MonthClick(month)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-50">
+                @DateTimeFormatInfo.CurrentInfo.GetMonthName(month)
+            </button>
+        }
+    </div>
+}
+
+<div class="border-t mx-2 my-2"></div>
+
+<div class="flex flex-row gap-x-2 mx-1 justify-end">
+    <button @onclick="() => Back()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Back</button>
+    <button @onclick="() => Close()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Close</button>
+</div>
+
+@code {
+
+    [Parameter]
+    public int Month { get; set; }
+
+    [Parameter]
+    public EventCallback<int> MonthSelected { get; set; }
+
+    [Parameter]
+    public EventCallback CloseMonthSelected { get; set; }
+
+    [Parameter]
+    public EventCallback ClosePopup { get; set; }
+
+    void MonthClick(int value)
+    {
+        MonthSelected.InvokeAsync(value);
+    }
+
+    void Close()
+    {
+        ClosePopup.InvokeAsync();
+    }
+
+    void Back()
+    {
+        CloseMonthSelected.InvokeAsync();
+    }
+}

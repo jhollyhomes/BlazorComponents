@@ -10,7 +10,7 @@
     {
         if (i >= (int)_firstDayOfMonth)
         {
-            <DayInMonth Day="_dayInMonth" Month="Month" Year="Year" SelectedDate="SelectedDate" SelectDay="SelectDayInMonth" />
+            <DaySelectorDay Day="_dayInMonth" Month="Month" Year="Year" SelectedDate="SelectedDate" SelectDay="SelectDayInMonth" />
             _dayInMonth++;
         }
         else
@@ -27,7 +27,7 @@
         {
             if (_dayInMonth <= _daysInMonth)
             {
-                <DayInMonth Day="_dayInMonth" Month="Month" Year="Year" SelectedDate="SelectedDate" SelectDay="SelectDayInMonth" />
+                <DaySelectorDay Day="_dayInMonth" Month="Month" Year="Year" SelectedDate="SelectedDate" SelectDay="SelectDayInMonth" />
                 _dayInMonth++;
             }
             else

@@ -8,13 +8,14 @@
                     case 0:
                         <span class="px-2 py-0.5">Select items</span>
                         break;
-                    case > 4:
+                    case > MAX_ITEMS_TO_DISPLAY:
                         <span class="px-2 py-0.5">@items.Count(x => x.IsChecked) items selected</span>
                         break;
                     default:
                         @foreach (var selected in items.Where(x => x.IsChecked))
                         {
-                            <span @onclick="() => Toggle(selected.Key)" class="px-2 py-0.5 mx-1 text-xs font-medium text-center inline-flex items-center text-gray-800 bg-blue-200 border rounded-lg ">
+                            <span @onclick="() => Toggle(selected.Key)" class="px-2 py-0.5 mx-1 text-xs font-medium text-center inline-flex items-center 
+                                                                               text-gray-800 bg-blue-200 hover:bg-blue-300 border rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 text-gray-800 me-1">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>

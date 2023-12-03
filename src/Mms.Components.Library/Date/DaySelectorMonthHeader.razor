@@ -6,9 +6,9 @@
         </svg>
     </button>
     
-    <div>
-        <span class="text-gray-600 text-sm font-medium mr-1">@(MonthName())</span><span class="text-gray-600 text-sm font-medium">@(Year.ToString())</span>
-    </div>
+    <button @onclick="(() => ChangeMonthYear())" class="px-2 text-gray-600 text-sm font-medium rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
+        <span class="mr-1">@(MonthName())</span><span class="text-gray-600 text-sm font-medium">@(Year.ToString("D4"))</span>
+    </button>
 
     <button @onclick="(() => NextMonth())" class="rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-600">
@@ -22,6 +22,9 @@
 
     [Parameter]
     public EventCallback<DateOnly> DateChanged {get; set; }
+
+    [Parameter]
+    public EventCallback MonthYearChange { get; set; }
 
     [Parameter, EditorRequired]
     public int Month { get; set; }
@@ -45,7 +48,10 @@
         if (Month == 1)
         {
             Month = 12;
-            Year--;
+            if (Year > 1)
+            {
+                Year--;
+            }
         }
         else
         {
@@ -68,5 +74,10 @@
         }
 
         DateChanged.InvokeAsync(new DateOnly(Year, Month, 1));
+    }
+
+    private void ChangeMonthYear()
+    {
+        MonthYearChange.InvokeAsync();
     }
 }

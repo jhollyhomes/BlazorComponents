@@ -1,4 +1,4 @@
-﻿<div @onclick="() => ClosePopup()" class="@(_visible ? "visible" : "invisible")   fixed z-10 inset-0 transition-opacity"></div>
+﻿<div @onclick="() => ClosePopup()" class="@(_dropdownVisible ? "visible" : "invisible") fixed z-10 inset-0 transition-opacity"></div>
 
 <div class="relative w-full">
 
@@ -23,27 +23,39 @@
         }
     </button>
 
-    @if(_visible)
+    @if (_dropdownVisible)
     {
         <div class="w-72 absolute top-[10.5] z-10 origin-top rounded-md bg-white text-center p-2
                     shadow-lg ring-1 ring-gray-900/5 focus:outline-none" tabindex="-1">
 
             <div class="flex flex-col justify-between">
 
-                <MonthYearSelector DateChanged="DateViewUpdated" Month="ViewMonth" Year="ViewYear" />
-                <div class="border-t mx-1 mt-1"></div>
-                <DailyHeaders />
-                <div class="border-t mx-1 mb-1"></div>
-                <DaysInMonth Month="ViewMonth" Year="ViewYear" SelectedDate="Date" SelectedDateChanged="SelectedDateChanged" />
+                @switch (_dateView)
+                {
+                    case DateSelectorView.Days:
+                        <DaySelectorMonthHeader DateChanged="DateViewUpdated" MonthYearChange="MonthSelectedOpen" Month="ViewMonth" Year="ViewYear" />
+                        <div class="border-t mx-1 mt-1"></div>
+                        <DaySelectorHeader />
+                        <div class="border-t mx-1 mb-1"></div>
+                        <DaySelectorDays Month="ViewMonth" Year="ViewYear" SelectedDate="Date" SelectedDateChanged="SelectedDateChanged" />
+                        <div class="border-t mx-1 my-1"></div>
+                        <div class="flex flex-row gap-x-2 mx-1 mt-1 justify-end">
+                            <button @onclick="() => ClearDate()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Clear</button>
+                            <button @onclick="() => ClosePopup()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Close</button>
+                        </div>
+                        break;
+                    case DateSelectorView.Months:
+                        <MonthSelector ClosePopup="ClosePopup" Month="ViewMonth" CloseMonthSelected="MonthSeletedClose" MonthSelected="MonthSelected" />
+                        break;
+                    case DateSelectorView.Years:
+                        <span class="px-2 py-0.5">Years</span>
+                        break;
+                    case DateSelectorView.TenYears:
+                        <span class="px-2 py-0.5">Ten Years</span>
+                        break;
+                }
 
-                <div class="border-t mx-1 my-1"></div>
-
-                <div class="flex flex-row gap-x-2 mx-1 mt-1 justify-end">
-                    <button @onclick="() => ClearDate()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Clear</button>
-                    <button @onclick="() => ClosePopup()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Close</button>
-                </div>
             </div>
-
         </div>
     }
 
@@ -57,31 +69,38 @@
     public int ViewMonth { get; set; }
     public int ViewYear { get; set; }
 
-    public void DateViewUpdated(DateOnly value)
-    {
-        ViewMonth = value.Month;
-        ViewYear = value.Year;
-    }
+    bool _dropdownVisible = false;
+    DateSelectorView _dateView = DateSelectorView.Days;
+
     protected override void OnParametersSet()
     {
         ViewMonth = Date.Month;
         ViewYear = Date.Year;
     }
 
-    public void SelectedDateChanged(DateOnly value)
+    void DateViewUpdated(DateOnly value)
+    {
+        ViewMonth = value.Month;
+        ViewYear = value.Year;
+    }
+
+    void SelectedDateChanged(DateOnly value)
     {
         Date = value;
 
         ViewMonth = value.Month;
         ViewYear = value.Year;
 
-        _visible = false;
+        _dropdownVisible = false;
     }
 
-    private bool _visible = false;
+    void ClosePopup()
+    {
+        _dropdownVisible = false;
+        _dateView = DateSelectorView.Days;
+    }
 
-    void ClosePopup() => _visible = false;
-    void TogglePopup() => _visible = !_visible;
+    void TogglePopup() => _dropdownVisible = !_dropdownVisible;
 
     void ClearDate()
     {
@@ -91,6 +110,24 @@
         ViewMonth = today.Month;
         ViewYear = today.Year;
 
-        _visible = false;
+        _dateView = DateSelectorView.Days;
+        _dropdownVisible = false;
+    }
+
+    void MonthSelectedOpen()
+    {
+        _dateView = DateSelectorView.Months;
+    }
+
+    void MonthSeletedClose()
+    {
+        _dateView = DateSelectorView.Days;
+    }
+
+    void MonthSelected(int month)
+    {
+        ViewMonth = month;
+        _dateView = DateSelectorView.Days;
+
     }
 }
