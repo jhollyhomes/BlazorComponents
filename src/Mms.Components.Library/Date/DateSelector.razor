@@ -30,7 +30,7 @@
 
             <div class="flex flex-col justify-between">
 
-                @switch (_dateView)
+                @switch (_dateSelectorView)
                 {
                     case DateSelectorView.Days:
                         <DaySelectorMonthHeader DateChanged="DateViewUpdated" MonthYearChange="MonthSelectedOpen" Month="ViewMonth" Year="ViewYear" />
@@ -44,14 +44,10 @@
                             <button @onclick="() => ClosePopup()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Close</button>
                         </div>
                         break;
-                    case DateSelectorView.Months:
-                        <MonthSelector DateChanged="DateViewUpdated" ClosePopup="ClosePopup" Month="ViewMonth" CloseMonthSelected="MonthSeletedClose" Year="ViewYear" />
-                        break;
-                    case DateSelectorView.Years:
-                        <span class="px-2 py-0.5">Years</span>
-                        break;
                     case DateSelectorView.TenYears:
-                        <span class="px-2 py-0.5">Ten Years</span>
+                    case DateSelectorView.Years:
+                    case DateSelectorView.Months:
+                        <MonthSelector DateSelectorView="_dateSelectorView" DateChanged="DateViewUpdated" ClosePopup="ClosePopup" Month="ViewMonth" CloseMonthSelected="MonthSeletedClose" Year="ViewYear" />
                         break;
                 }
 
@@ -66,11 +62,12 @@
     [Parameter]
     public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
+    DateSelectorView _dateSelectorView { get; set; } = DateSelectorView.Days;
+
     public int ViewMonth { get; set; }
     public int ViewYear { get; set; }
 
     bool _dropdownVisible = false;
-    DateSelectorView _dateView = DateSelectorView.Days;
 
     protected override void OnParametersSet()
     {
@@ -83,7 +80,7 @@
         ViewMonth = value.Month;
         ViewYear = value.Year;
 
-        _dateView = DateSelectorView.Days;
+        _dateSelectorView = DateSelectorView.Days;
     }
 
     void SelectedDateChanged(DateOnly value)
@@ -99,7 +96,7 @@
     void ClosePopup()
     {
         _dropdownVisible = false;
-        _dateView = DateSelectorView.Days;
+        _dateSelectorView = DateSelectorView.Days;
     }
 
     void TogglePopup() => _dropdownVisible = !_dropdownVisible;
@@ -112,24 +109,24 @@
         ViewMonth = today.Month;
         ViewYear = today.Year;
 
-        _dateView = DateSelectorView.Days;
+        _dateSelectorView = DateSelectorView.Days;
         _dropdownVisible = false;
     }
 
     void MonthSelectedOpen()
     {
-        _dateView = DateSelectorView.Months;
+        _dateSelectorView = DateSelectorView.Months;
     }
 
     void MonthSeletedClose()
     {
-        _dateView = DateSelectorView.Days;
+        _dateSelectorView = DateSelectorView.Days;
     }
 
     void MonthSelected(int month)
     {
         ViewMonth = month;
-        _dateView = DateSelectorView.Days;
+        _dateSelectorView = DateSelectorView.Days;
 
     }
 }

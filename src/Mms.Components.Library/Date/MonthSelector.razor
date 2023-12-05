@@ -1,38 +1,77 @@
 ﻿@using System.Globalization
 
-<div class="flex flex-row justify-between p-1">
-
-    <button @onclick="(() => PreviousYear())" class="rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-500">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-        </svg>
-    </button>
-
-    <button @onclick="(() => ChangeYear())" class="px-2 text-gray-600 text-sm font-medium rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
-        <span>@(Year.ToString("D4"))</span>
-    </button>
-
-    <button @onclick="(() => NextYear())" class="rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-600">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-        </svg>
-    </button>
-
-</div>
-
-<div class="my-1"></div>
-
-@for (int j = 0; j < 10; j += 3)
+@switch (DateSelectorView)
 {
-    <div class="flex flex-row justify-evenly my-0.5">
-        @for (int i = 1; i <= 3; i++)
+    case DateSelectorView.Months:
+            <div class="flex flex-row justify-between p-1">
+                <DateSelectorNavigateLeft ButtonClick="PreviousYear" />
+                <button @onclick="(() => ChangeYear())" class="px-2 text-gray-600 text-sm font-medium rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
+                    <span>@(Year.ToString("D4"))</span>
+                </button>
+                <DateSelectorNavigateRight ButtonClick="PreviousYear" />
+            </div>
+
+            <div class="my-1"></div>
+
+            @for (int j = 0; j < 10; j += 3)
+            {
+                <div class="flex flex-row justify-evenly my-0.5">
+                    @for (int i = 1; i <= 3; i++)
+                    {
+                        var month = i + j;
+
+                        if (Month == month)
+                        {
+                            <button @onclick="() => MonthClick(month)" class="w-20 bg-blue-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-200">
+                                @DateTimeFormatInfo.CurrentInfo.GetMonthName(month)
+                            </button>
+                        }
+                        else
+                        {
+                            <button @onclick="() => MonthClick(month)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-50">
+                                @DateTimeFormatInfo.CurrentInfo.GetMonthName(month)
+                            </button>
+                        }
+                    }
+                </div>
+            }
+        break;
+    case DateSelectorView.Years:
+        <div class="flex flex-row justify-between p-1">
+            <DateSelectorNavigateLeft ButtonClick="PreviousYears" />
+            <DateSelectorNavigateRight ButtonClick="NextYears" />
+        </div>
+
+        <div class="my-1"></div>
+
+        @for (int j = Year - 6; j < Year + 6; j += 3)
         {
-            var month = i + j;
-            <button @onclick="() => MonthClick(month)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-50">
-                @DateTimeFormatInfo.CurrentInfo.GetMonthName(month)
-            </button>
+            <div class="flex flex-row justify-evenly my-0.5">
+                @for (int i = 1; i <= 3; i++)
+                {
+                    var year = i + j;
+
+                    if (Year == year)
+                    {
+                        <button @onclick="() => YearClick(year)" class="w-20 bg-blue-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-200">
+                            @(year.ToString("D4"))
+                        </button>
+                    }
+                    else
+                    {
+                        <button @onclick="() => YearClick(year)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-50">
+                            @(year.ToString("D4"))
+                        </button>
+                    }
+                }
+            </div>
         }
-    </div>
+        break;
+    case DateSelectorView.TenYears:
+        <div class="flex flex-row justify-between p-1">
+            Ten Years
+        </div>
+        break;
 }
 
 <div class="border-t mx-2 my-2"></div>
@@ -41,6 +80,7 @@
     <button @onclick="() => Back()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Back</button>
     <button @onclick="() => Close()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Close</button>
 </div>
+
 
 @code {
 
@@ -59,9 +99,12 @@
     [Parameter]
     public EventCallback ClosePopup { get; set; }
 
+    [Parameter]
+    public DateSelectorView DateSelectorView { get; set; }
+
     private void ChangeYear()
     {
-
+        DateSelectorView = DateSelectorView.Years;
     }
 
     private void PreviousYear()
@@ -77,11 +120,31 @@
         Year++;
     }
 
+    private void PreviousYears()
+    {
+        if (Year - 12 > 1)
+        {
+            Year -= 12;
+        }
+    }
+
+    private void NextYears()
+    {
+        Year += 12;
+    }
+
     void MonthClick(int value)
     {
         Month = value;
 
         DateChanged.InvokeAsync(new DateOnly(Year, Month, 1));
+    }
+
+    void YearClick(int value)
+    {
+        Year = value;
+
+        DateSelectorView = DateSelectorView.Months;
     }
 
     void Close()
@@ -91,6 +154,17 @@
 
     void Back()
     {
-        CloseMonthSelected.InvokeAsync();
+        if (DateSelectorView == DateSelectorView.Months)
+        {
+            CloseMonthSelected.InvokeAsync();
+        }
+        else if (DateSelectorView == DateSelectorView.Years)
+        {
+            DateSelectorView = DateSelectorView.Months;
+        }
+        else if (DateSelectorView == DateSelectorView.TenYears)
+        {
+            DateSelectorView = DateSelectorView.Years;
+        }
     }
 }

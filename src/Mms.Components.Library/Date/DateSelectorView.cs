@@ -1,5 +1,5 @@
 ﻿namespace Mms.Components.Library.Date;
-internal enum DateSelectorView
+public enum DateSelectorView
 {
     Days = 0,
     Months = 1,
