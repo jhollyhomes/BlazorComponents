@@ -1,5 +1,25 @@
 ﻿@using System.Globalization
 
+<div class="flex flex-row justify-between p-1">
+
+    <button @onclick="(() => PreviousYear())" class="rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+    </button>
+
+    <button @onclick="(() => ChangeYear())" class="px-2 text-gray-600 text-sm font-medium rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
+        <span>@(Year.ToString("D4"))</span>
+    </button>
+
+    <button @onclick="(() => NextYear())" class="rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 m-1 text-gray-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+    </button>
+
+</div>
+
 <div class="my-1"></div>
 
 @for (int j = 0; j < 10; j += 3)
@@ -24,11 +44,14 @@
 
 @code {
 
-    [Parameter]
+    [Parameter, EditorRequired]
     public int Month { get; set; }
 
+    [Parameter, EditorRequired]
+    public int Year { get; set; }
+
     [Parameter]
-    public EventCallback<int> MonthSelected { get; set; }
+    public EventCallback<DateOnly> DateChanged { get; set; }
 
     [Parameter]
     public EventCallback CloseMonthSelected { get; set; }
@@ -36,9 +59,29 @@
     [Parameter]
     public EventCallback ClosePopup { get; set; }
 
+    private void ChangeYear()
+    {
+
+    }
+
+    private void PreviousYear()
+    {
+        if (Year > 1)
+        {
+            Year--;
+        }
+    }
+
+    private void NextYear()
+    {
+        Year++;
+    }
+
     void MonthClick(int value)
     {
-        MonthSelected.InvokeAsync(value);
+        Month = value;
+
+        DateChanged.InvokeAsync(new DateOnly(Year, Month, 1));
     }
 
     void Close()
