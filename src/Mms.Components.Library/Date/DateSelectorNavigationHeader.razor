@@ -1,0 +1,12 @@
+﻿<button @onclick="ButtonClick" class="px-2 text-gray-600 text-sm font-medium rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
+    @ChildContent
+</button>
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback ButtonClick { get; set; }
+}

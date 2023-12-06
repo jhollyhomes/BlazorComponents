@@ -1,14 +1,14 @@
 ﻿@using System.Globalization
 
-@switch (DateSelectorView)
+@switch (DateSelectorViewState)
 {
     case DateSelectorView.Months:
             <div class="flex flex-row justify-between p-1">
                 <DateSelectorNavigateLeft ButtonClick="PreviousYear" />
-                <button @onclick="(() => ChangeYear())" class="px-2 text-gray-600 text-sm font-medium rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
+                <DateSelectorNavigationHeader ButtonClick="ChangeYear">
                     <span>@(Year.ToString("D4"))</span>
-                </button>
-                <DateSelectorNavigateRight ButtonClick="PreviousYear" />
+                </DateSelectorNavigationHeader>
+                <DateSelectorNavigateRight ButtonClick="NextYear" />
             </div>
 
             <div class="my-1"></div>
@@ -51,18 +51,9 @@
                 {
                     var year = i + j;
 
-                    if (Year == year)
-                    {
-                        <button @onclick="() => YearClick(year)" class="w-20 bg-blue-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-200">
-                            @(year.ToString("D4"))
-                        </button>
-                    }
-                    else
-                    {
-                        <button @onclick="() => YearClick(year)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-50">
-                            @(year.ToString("D4"))
-                        </button>
-                    }
+                    <button @onclick="() => YearClick(year)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-50">
+                        @(year.ToString("D4"))
+                    </button>
                 }
             </div>
         }
@@ -100,11 +91,11 @@
     public EventCallback ClosePopup { get; set; }
 
     [Parameter]
-    public DateSelectorView DateSelectorView { get; set; }
+    public DateSelectorView DateSelectorViewState { get; set; }
 
     private void ChangeYear()
     {
-        DateSelectorView = DateSelectorView.Years;
+        DateSelectorViewState = DateSelectorView.Years;
     }
 
     private void PreviousYear()
@@ -144,7 +135,7 @@
     {
         Year = value;
 
-        DateSelectorView = DateSelectorView.Months;
+        DateSelectorViewState = DateSelectorView.Months;
     }
 
     void Close()
@@ -154,17 +145,17 @@
 
     void Back()
     {
-        if (DateSelectorView == DateSelectorView.Months)
+        if (DateSelectorViewState == DateSelectorView.Months)
         {
             CloseMonthSelected.InvokeAsync();
         }
-        else if (DateSelectorView == DateSelectorView.Years)
+        else if (DateSelectorViewState == DateSelectorView.Years)
         {
-            DateSelectorView = DateSelectorView.Months;
+            DateSelectorViewState = DateSelectorView.Months;
         }
-        else if (DateSelectorView == DateSelectorView.TenYears)
+        else if (DateSelectorViewState == DateSelectorView.TenYears)
         {
-            DateSelectorView = DateSelectorView.Years;
+            DateSelectorViewState = DateSelectorView.Years;
         }
     }
 }

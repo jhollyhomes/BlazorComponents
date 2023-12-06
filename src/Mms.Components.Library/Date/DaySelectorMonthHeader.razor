@@ -1,8 +1,8 @@
 ﻿<div class="flex flex-row justify-between p-1">
     <DateSelectorNavigateLeft ButtonClick="PreviousMonth" />
-    <button @onclick="MonthYearChange" class="px-2 text-gray-600 text-sm font-medium rounded-md border border-white hover:bg-gray-50 hover:border-gray-200">
+    <DateSelectorNavigationHeader ButtonClick="MonthYearChange">
         <span class="mr-1">@(MonthName())</span><span class="text-gray-600 text-sm font-medium">@(Year.ToString("D4"))</span>
-    </button>
+    </DateSelectorNavigationHeader>
     <DateSelectorNavigateRight ButtonClick="NextMonth" />
 </div>
 

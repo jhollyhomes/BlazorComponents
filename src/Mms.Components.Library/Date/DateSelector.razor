@@ -47,7 +47,7 @@
                     case DateSelectorView.TenYears:
                     case DateSelectorView.Years:
                     case DateSelectorView.Months:
-                        <MonthSelector DateSelectorView="_dateSelectorView" DateChanged="DateViewUpdated" ClosePopup="ClosePopup" Month="ViewMonth" CloseMonthSelected="MonthSeletedClose" Year="ViewYear" />
+                        <MonthSelector DateSelectorViewState="_dateSelectorView" DateChanged="DateViewUpdated" ClosePopup="ClosePopup" Month="ViewMonth" Year="ViewYear" CloseMonthSelected="MonthSeletedClose" />
                         break;
                 }
 
@@ -121,12 +121,5 @@
     void MonthSeletedClose()
     {
         _dateSelectorView = DateSelectorView.Days;
-    }
-
-    void MonthSelected(int month)
-    {
-        ViewMonth = month;
-        _dateSelectorView = DateSelectorView.Days;
-
     }
 }
