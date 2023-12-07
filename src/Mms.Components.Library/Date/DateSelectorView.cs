@@ -3,6 +3,5 @@ public enum DateSelectorView
 {
     Days = 0,
     Months = 1,
-    Years = 2,
-    TenYears = 3,
+    Years = 2
 }
