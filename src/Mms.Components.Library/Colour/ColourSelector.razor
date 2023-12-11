@@ -9,7 +9,7 @@
     </div>
     @if (_dropdownVisible)
     {
-        <ColourPopupSelector OnClose="ClosePopup" OnColourSelected="OnColourSelected" />
+        <ColourPopupSelector OnClose="ClosePopup" OnColourSelected="ColourSelected" />
     }
 </div>
 
@@ -24,7 +24,7 @@
     [Parameter]
     public ColourTypes ColourType { get; set; } = ColourTypes.Text;
     [Parameter]
-    public Action<string> ColourState { get; set; } = default!;
+    public Action<string> ColourChanged { get; set; } = default!;
 
     bool _dropdownVisible = false;
 
@@ -32,12 +32,12 @@
 
     void ClosePopup() => _dropdownVisible = false;
 
-    private void OnColourSelected(SelectedColour selectedColour)
+    private void ColourSelected(SelectedColour selectedColour)
     {
         var colour = selectedColour.CreateColourCss(ColourType);
 
         _dropdownVisible = false;
 
-        ColourState.Invoke(colour);
+        ColourChanged.Invoke(colour);
     }
 }
