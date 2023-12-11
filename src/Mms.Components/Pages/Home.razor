@@ -26,6 +26,10 @@
         <ToggleButton />
     </div>
 
+    <div class="w-96 my-5">
+        <ColourSetting ColourState="SetColourValue" CurrentColour="ColourValue" CssType="ColourTypes.Background" />
+    </div>
+
 </div>
 
 @code {
@@ -49,5 +53,14 @@
                                                     new DropDownItem("WA", "Wales"),
                                                     new DropDownItem("NI", "Northern Ireland"),
                                                 };
+
+    private string ColourValue = "bg-blue-200";
+
+    public void SetColourValue(string value)
+    {
+        ColourValue = value;
+        StateHasChanged();
+    }
+
 
 }

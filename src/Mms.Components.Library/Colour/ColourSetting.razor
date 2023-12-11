@@ -1,0 +1,47 @@
+﻿<div class=" flex">
+    <div class="flex h-6 items-center">
+        <button @onclick="ShowColourPopup" class="bg-@(CurrentColour.RemoveTailwindPrefix()) shadow-xl border border-gray-300 
+                                                  hover:bg-@(CurrentColour.RemoveTailwindPrefix())/80 w-5 h-5">
+        </button>
+    </div>
+    @ChildContent
+</div>
+
+@if (_displayColourSetting)
+{
+    <div @onclick="CloseColourPopup" class="fixed z-[5] inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    <ColourPopupSelector OnClose="CloseColourPopup" OnColourSelected="OnColourSelected" />
+}
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+    [Parameter]
+    public string CurrentColour { get; set; } = default!;
+    [Parameter]
+    public ColourTypes CssType { get; set; } = ColourTypes.Text;
+    [Parameter]
+    public Action<string> ColourState { get; set; } = default!;
+
+    private bool _displayColourSetting = false;
+
+    public void ShowColourPopup()
+    {
+        _displayColourSetting = true;
+    }
+
+    public void CloseColourPopup()
+    {
+        _displayColourSetting = false;
+    }
+
+    private void OnColourSelected(SelectedColour selectedColour)
+    {
+        var colourCss = selectedColour.CreateColourCss(CssType);
+
+        _displayColourSetting = false;
+
+        ColourState.Invoke(colourCss);
+    }
+}
