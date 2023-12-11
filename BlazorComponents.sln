@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC6A0204-809
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mms.Components", "src\Mms.Components\Mms.Components.csproj", "{B4D5419F-279A-4DC1-9B3E-72B8CD255D27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mms.Components.Library", "src\Mms.Components.Library\Mms.Components.Library.csproj", "{A59B6195-4758-4B39-AF34-8D0D9097B9E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mms.Components.Library", "src\Mms.Components.Library\Mms.Components.Library.csproj", "{A59B6195-4758-4B39-AF34-8D0D9097B9E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

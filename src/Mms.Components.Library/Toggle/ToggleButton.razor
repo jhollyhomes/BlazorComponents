@@ -1,0 +1,46 @@
+﻿<div class="relative w-full">
+    <button type="button" class="@_toggleButtonClass relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
+                                transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2" 
+            role="switch" aria-checked="false" @onclick="OnButtonClick">
+        <span aria-hidden="true" class="@_toggleSpanClass pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow 
+                                        ring-0 transition duration-200 ease-in-out"></span>
+    </button>
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    [Parameter]
+    public ToggleState Value { get; set; } = ToggleState.Off;
+
+    private string _toggleButtonClass = "bg-gray-200";
+    private string _toggleSpanClass = "translate-x-0";
+
+    private void OnButtonClick()
+    {
+        if (Value == ToggleState.On)
+        {
+            Value = ToggleState.Off;
+
+            _toggleButtonClass = "bg-gray-200";
+            _toggleSpanClass = "translate-x-0";
+
+            ValueChanged.InvokeAsync(true);
+        }
+        else if (Value == ToggleState.Off)
+        {
+            Value = ToggleState.On;
+
+            _toggleButtonClass = "bg-blue-200";
+            _toggleSpanClass = "translate-x-5";
+
+            ValueChanged.InvokeAsync(false);
+        }
+    }
+}

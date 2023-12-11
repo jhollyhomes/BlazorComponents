@@ -13,7 +13,9 @@ using blazor & tailwind created components for general use
 - [X] Clear date option on date picker
 - [X] Move components to a component project
 - [X] Select Month
-- [ ] Select Year to Month
-- [ ] Select 10 Year to Year to Month
-- [ ] make Multiselect use hidden div same as date picker
+- [X] Select Year to Month
+- [X] Select 10 Year to Year to Month
+- [X] make Multiselect use hidden div same as date picker
 - [ ] Add a from date - to date component
+- [X] Add toggle component
+- [ ] Add Colour selector

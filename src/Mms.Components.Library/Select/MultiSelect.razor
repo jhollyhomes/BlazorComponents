@@ -1,5 +1,7 @@
-﻿<div class="relative group w-full">
-    <button type="button" class="flex items-center w-full bg-white border shadow-sm border-gray-300 rounded-md p-1 hover:bg-blue-50">
+﻿<div @onclick="() => ClosePopup()" class="@(_dropdownVisible ? "visible" : "invisible") fixed z-10 inset-0 transition-opacity"></div>
+
+<div class="relative w-full">
+    <button type="button" @onclick="() => TogglePopup()" class="flex items-center w-full bg-white border shadow-sm border-gray-300 rounded-md p-1 hover:bg-blue-50">
         <span class="block truncate">
             @if (items != null)
             {
@@ -14,9 +16,8 @@
                     default:
                         @foreach (var selected in items.Where(x => x.IsChecked))
                         {
-                            <span @onclick="() => Toggle(selected.Key)" class="px-2 py-0.5 mx-1 text-xs font-medium text-center inline-flex items-center 
-                                                                               text-gray-800 bg-blue-200 hover:bg-blue-300 border rounded-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 text-gray-800 me-1">
+                            <span @onclick="() => Toggle(selected.Key)" class="px-2 py-0.5 mx-0.5 text-sm font-medium text-center inline-flex items-center text-gray-700 bg-blue-200 border rounded-lg hover:bg-blue-300 focus:ring-4 focus:outline-none focus:ring-blue-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-800 me-1">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                                 @selected.Value
@@ -28,22 +29,24 @@
         </span>
     </button>
 
-    <div class="invisible w-full group-focus-within:visible group-active:visible absolute top-[10.5] z-10 origin-top
-                rounded-md bg-white text-center py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
-         tabindex="-1">
+    @if (_dropdownVisible)
+    {
+        <div class="w-full absolute top-[10.5] z-10 origin-top rounded-md bg-white text-center py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+                tabindex="-1">
 
-        <div class="flex flex-col justify-between">
-            @if (items != null)
-            {
-                @foreach (var item in items)
+            <div class="flex flex-col justify-between">
+                @if (items != null)
                 {
-                    <button @onclick="() => Toggle(item.Key)" class="flex flex-row items-center px-3 py-0.5 cursor-pointer hover:bg-gray-200 select-none">
-                        <input id="@item.Key" name="@item.Key" @bind="@item.IsChecked" type="checkbox" class="h-4 w-4 cursor-pointer rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                        <span class="ml-3 cursor-pointer block text-sm leading-6 text-gray-900">@item.Value</span>
-                    </button>
+                    @foreach (var item in items)
+                    {
+                        <button @onclick="() => Toggle(item.Key)" class="flex flex-row items-center px-3 py-0.5 cursor-pointer hover:bg-gray-200 select-none">
+                            <input id="@item.Key" name="@item.Key" @bind="@item.IsChecked" type="checkbox" class="h-4 w-4 cursor-pointer rounded bg-blue-500 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            <span class="ml-3 cursor-pointer block text-sm leading-6 text-gray-900">@item.Value</span>
+                        </button>
+                    }
                 }
-            }
-        </div>
+            </div>
 
-    </div>
+        </div>
+    }
 </div>
