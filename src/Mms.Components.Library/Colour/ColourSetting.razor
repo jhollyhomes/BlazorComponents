@@ -1,17 +1,19 @@
-﻿<div class=" flex">
-    <div class="flex h-6 items-center">
-        <button @onclick="ShowColourPopup" class="bg-@(CurrentColour.RemoveTailwindPrefix()) shadow-xl border border-gray-300 
+﻿<div @onclick="() => ClosePopup()" class="@(_dropdownVisible ? "visible" : "invisible") fixed z-20 inset-0 transition-opacity"></div>
+
+<div class="relative w-full">
+    <div class="flex h-6">
+        <button @onclick="TogglePopup" class="bg-@(CurrentColour.RemoveTailwindPrefix()) shadow-xl border border-gray-300 
                 hover:outline-none hover:ring-2 hover:ring-blue-200 hover:ring-offset-2 w-5 h-5">
         </button>
+        @ChildContent
     </div>
-    @ChildContent
+    @if (_dropdownVisible)
+    {
+        <ColourPopupSelector OnClose="ClosePopup" OnColourSelected="OnColourSelected" />
+    }
 </div>
 
-@if (_displayColourSetting)
-{
-    <div @onclick="CloseColourPopup" class="fixed z-[5] inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-    <ColourPopupSelector OnClose="CloseColourPopup" OnColourSelected="OnColourSelected" />
-}
+
 
 @code {
 
@@ -20,28 +22,25 @@
     [Parameter]
     public string CurrentColour { get; set; } = default!;
     [Parameter]
-    public ColourTypes CssType { get; set; } = ColourTypes.Text;
+    public ColourTypes ColourType { get; set; } = ColourTypes.Text;
     [Parameter]
     public Action<string> ColourState { get; set; } = default!;
 
-    private bool _displayColourSetting = false;
+    bool _dropdownVisible = false;
 
-    public void ShowColourPopup()
-    {
-        _displayColourSetting = true;
-    }
+    void TogglePopup() => _dropdownVisible = !_dropdownVisible;
 
-    public void CloseColourPopup()
+    public void ClosePopup()
     {
-        _displayColourSetting = false;
+        _dropdownVisible = false;
     }
 
     private void OnColourSelected(SelectedColour selectedColour)
     {
-        var colourCss = selectedColour.CreateColourCss(CssType);
+        var colour = selectedColour.CreateColourCss(ColourType);
 
-        _displayColourSetting = false;
+        _dropdownVisible = false;
 
-        ColourState.Invoke(colourCss);
+        ColourState.Invoke(colour);
     }
 }

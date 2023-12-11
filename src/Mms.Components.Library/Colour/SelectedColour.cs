@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Mms.Components.Library.Colour;
+﻿namespace Mms.Components.Library.Colour;
 
 public class SelectedColour
 {
@@ -20,11 +14,11 @@ public class SelectedColour
     public string Colour { get; set; } = default!;
     public string Shade { get; set; } = default!;
 
-    public string CreateColourCss(ColourTypes cssType)
+    public string CreateColourCss(ColourTypes colourTypes)
     {
         if (Colour == "white")
         {
-            return cssType switch
+            return colourTypes switch
             {
                 ColourTypes.Text => "text-white",
                 ColourTypes.Background => "bg-white",
@@ -36,7 +30,7 @@ public class SelectedColour
 
         if (Colour == "black")
         {
-            return cssType switch
+            return colourTypes switch
             {
                 ColourTypes.Text => "text-black",
                 ColourTypes.Background => "bg-black",
@@ -46,7 +40,7 @@ public class SelectedColour
             };
         }
 
-        return cssType switch
+        return colourTypes switch
         {
             ColourTypes.Text => string.Concat("text-", Colour, "-", Shade),
             ColourTypes.Background => string.Concat("bg-", Colour, "-", Shade),
