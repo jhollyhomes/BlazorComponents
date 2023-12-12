@@ -36,17 +36,20 @@ Uses singleton state object as a Cascading Parameter that holds the state for co
 - ability to customise colours quickly
 - Hides items after set number (in this case 3) and display Items Selected X message.
 
-<img src="https://github.com/jhollyhomes/BlazorComponents/assets/6323972/f996c6f9-1924-48c8-950b-2193f07c521c" width="100">
+<img src="https://github.com/jhollyhomes/BlazorComponents/assets/6323972/f996c6f9-1924-48c8-950b-2193f07c521c" width="300">
 
 ## Date control
 - ability to customise colours quickly
 - Can change month year and ten years
-![image](https://github.com/jhollyhomes/BlazorComponents/assets/6323972/fe70bfed-47bf-4a76-a9f8-dbdfd49be3f4)
+
+<img src="https://github.com/jhollyhomes/BlazorComponents/assets/6323972/fe70bfed-47bf-4a76-a9f8-dbdfd49be3f4" width="300">
 
 ## Toggle control
-![image](https://github.com/jhollyhomes/BlazorComponents/assets/6323972/e56df648-5301-4706-8972-2ae034526a3c)
+
+<img src="https://github.com/jhollyhomes/BlazorComponents/assets/6323972/e56df648-5301-4706-8972-2ae034526a3c" width="300">
 
 ## Colour control
 - Can select one of the tailwind colours (some removed as very similar but easy to add in)
-![image](https://github.com/jhollyhomes/BlazorComponents/assets/6323972/7b4bca09-a7da-4012-b9d8-b9fe02c72e93)
+
+<img src="https://github.com/jhollyhomes/BlazorComponents/assets/6323972/7b4bca09-a7da-4012-b9d8-b9fe02c72e93" width="300">
 
