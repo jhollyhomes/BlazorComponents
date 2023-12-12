@@ -1,14 +1,17 @@
 ﻿<div class="relative w-full">
     <button type="button" class="@_toggleButtonClass relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
-                                transition-colors duration-200 ease-in-out hover:outline-none hover:ring-2 hover:ring-blue-200 hover:ring-offset-2"
+                                transition-colors duration-200 ease-in-out"
             role="switch" aria-checked="false" @onclick="OnButtonClick">
         <span aria-hidden="true" class="@_toggleSpanClass pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow 
-                                        ring-0 transition duration-200 ease-in-out"></span>
+                                        transition duration-200 ease-in-out"></span>
     </button>
     @ChildContent
 </div>
 
 @code {
+    
+    [CascadingParameter]
+    protected ThemeState ThemeState { get; set; } = default!;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; } = default!;
@@ -24,7 +27,7 @@
 
     private void SetToggleOn()
     {
-        _toggleButtonClass = "bg-blue-200";
+        _toggleButtonClass = ThemeState.ButtonColour + " hover:" + ThemeState.ButtonHoverColour;
         _toggleSpanClass = "translate-x-5";
     }
 

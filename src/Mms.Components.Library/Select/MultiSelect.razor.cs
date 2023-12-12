@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Mms.Components.Library.State;
 
 namespace Mms.Components.Library.Select;
 
 public partial class MultiSelect
 {
+    [CascadingParameter]
+    protected ThemeState ThemeState { get; set; } = default!;
+
     [Parameter]
     public List<DropDownItem> items { get; set; } = default!;
 

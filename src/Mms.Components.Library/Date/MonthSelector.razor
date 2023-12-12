@@ -22,13 +22,13 @@
 
                         if (SelectedDate.Year.Equals(Year) && (SelectedDate.Month.Equals(month)))
                         {
-                            <button @onclick="() => MonthClick(month)" class="w-20 bg-blue-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-200">
+                            <button @onclick="() => MonthClick(month)" class="w-20 border rounded p-1 text-xs font-medium @(ThemeState.ButtonColour) hover:@(ThemeState.ButtonHoverColour) @(ThemeState.ButtonTextColour)">
                                 @DateTimeFormatInfo.CurrentInfo.GetMonthName(month)
                             </button>
                         }
                         else
                         {
-                            <button @onclick="() => MonthClick(month)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-50">
+                            <button @onclick="() => MonthClick(month)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:border-gray-200">
                                 @DateTimeFormatInfo.CurrentInfo.GetMonthName(month)
                             </button>
                         }
@@ -56,13 +56,13 @@
 
                     if (SelectedDate.Year.Equals(year))
                     {
-                        <button @onclick="() => YearClick(year)" class="w-20 bg-blue-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-200">
+                        <button @onclick="() => YearClick(year)" class="w-20 @(ThemeState.ButtonColour) hover:@(ThemeState.ButtonHoverColour) @(ThemeState.ButtonTextColour) border rounded p-1 text-xs font-medium">
                             @(year.ToString("D4"))
                         </button>
                     }
                     else
                     {
-                        <button @onclick="() => YearClick(year)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:bg-blue-50">
+                        <button @onclick="() => YearClick(year)" class="w-20 bg-gray-50 border rounded p-1 text-xs font-medium text-gray-500 hover:border-gray-200">
                             @(year.ToString("D4"))
                         </button>
                     }
@@ -75,12 +75,15 @@
 <div class="border-t mx-2 my-2"></div>
 
 <div class="flex flex-row gap-x-2 mx-1 justify-end">
-    <button @onclick="() => Back()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Back</button>
-    <button @onclick="() => Close()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Close</button>
+    <button @onclick="() => Back()" class="@(ThemeState.ButtonColour) hover:@(ThemeState.ButtonHoverColour) rounded border px-2 py-0.5 text-xs @(ThemeState.ButtonTextColour)">Back</button>
+    <button @onclick="() => Close()" class="@(ThemeState.ButtonColour) hover:@(ThemeState.ButtonHoverColour) rounded border px-2 py-0.5 text-xs @(ThemeState.ButtonTextColour)">Close</button>
 </div>
 
 
 @code {
+
+    [CascadingParameter]
+    protected ThemeState ThemeState { get; set; } = default!;
 
     [Parameter, EditorRequired]
     public int Month { get; set; }

@@ -5,16 +5,23 @@ public class ThemeState
     public ThemeState() 
     {
         BackgroundColour = "bg-red-100";
-        PrimaryColour = "bg-blue-600";
+        IconColour = "text-indigo-500";
         PrimaryLightColour = "bg-blue-100";
         PrimaryTextColour = "bg-gray-100";
+
+        ButtonColour = "bg-indigo-600";
+        ButtonHoverColour = "bg-indigo-500";
+        ButtonTextColour = "text-gray-50";
     }
 
     public event Action? OnStateChange;
     public string BackgroundColour { get; private set; } = default!;
-    public string PrimaryColour { get; private set; } = default!;
+    public string IconColour { get; private set; } = default!;
     public string PrimaryLightColour { get; private set; } = default!;
     public string PrimaryTextColour { get; private set; } = default!;
+    public string ButtonColour { get; private set; } = default!;
+    public string ButtonHoverColour { get; private set; } = default!;
+    public string ButtonTextColour { get; private set; } = default!;
 
     private void NotifyStateChanged() => OnStateChange?.Invoke();
     
@@ -23,9 +30,9 @@ public class ThemeState
         BackgroundColour = value;
         NotifyStateChanged();
     }
-    public void SetPrimaryColour(string value)
+    public void SetIconColour(string value)
     {
-        PrimaryColour = value;
+        IconColour = value;
         NotifyStateChanged();
     }
     public void SetPrimaryLightColour(string value)
@@ -36,6 +43,21 @@ public class ThemeState
     public void SetPrimaryTextColour(string value)
     {
         PrimaryTextColour = value;
+        NotifyStateChanged();
+    }
+    public void SetButtonColour(string value)
+    {
+        ButtonColour = value;
+        NotifyStateChanged();
+    }
+    public void SetButtonHoverColour(string value)
+    {
+        ButtonHoverColour = value;
+        NotifyStateChanged();
+    }
+    public void SetButtonTextColour(string value)
+    {
+        ButtonTextColour = value;
         NotifyStateChanged();
     }
 }

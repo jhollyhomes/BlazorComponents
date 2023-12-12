@@ -2,10 +2,8 @@
 
 <div class="relative w-full">
     <div class="flex h-6">
-        <button @onclick="TogglePopup" class="bg-@(CurrentColour.RemoveTailwindPrefix()) shadow-xl border border-gray-300 
-                hover:outline-none hover:ring-2 hover:ring-blue-200 hover:ring-offset-2 w-5 h-5">
+        <button @onclick="TogglePopup" class="bg-@(CurrentColour.RemoveTailwindPrefix()) shadow-xl border border-gray-300 w-5 h-5">
         </button>
-
         @ChildContent
     </div>
 
@@ -17,6 +15,9 @@
 </div>
 
 @code {
+
+    [CascadingParameter]
+    protected ThemeState ThemeState { get; set; } = default!;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; } = default!;

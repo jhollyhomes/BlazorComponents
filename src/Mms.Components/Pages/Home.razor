@@ -24,13 +24,13 @@
     
     <div class="w-96 my-5">
         <ToggleButton Value="_toggleButtonValue" ValueChanged="ToggleButtonChanged">
-            <span class="ml-2 text-sm font-normal">@(_toggleButtonValue.ToString())</span>
+            <span class="ml-3 text-sm font-normal">@(_toggleButtonValue.ToString())</span>
         </ToggleButton>
     </div>
 
     <div class="w-96 my-5">
         <ColourSelector ColourChanged="SetColourValue" CurrentColour="@ThemeState.BackgroundColour" ColourType="ColourTypes.Background" >
-            <span class="ml-2 text-sm font-normal">Background colour</span>
+            <span class="ml-3 text-sm font-normal">Background colour</span>
         </ColourSelector>
     </div>
 
