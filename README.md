@@ -46,7 +46,7 @@ Uses singleton state object as a Cascading Parameter that holds the state for co
 
 ## Toggle control
 
-<img src="https://github.com/jhollyhomes/BlazorComponents/assets/6323972/e56df648-5301-4706-8972-2ae034526a3c" width="100">
+<img src="https://github.com/jhollyhomes/BlazorComponents/assets/6323972/e56df648-5301-4706-8972-2ae034526a3c" width="70">
 
 ## Colour control
 - Can select one of the tailwind colours (some removed as very similar but easy to add in)
