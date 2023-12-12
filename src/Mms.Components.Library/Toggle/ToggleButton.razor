@@ -16,11 +16,35 @@
     [Parameter]
     public EventCallback<bool> ValueChanged { get; set; }
 
-    [Parameter]
-    public ToggleState Value { get; set; } = ToggleState.Off;
+    [Parameter, EditorRequired]
+    public ToggleState Value { get; set; }
 
-    private string _toggleButtonClass = "bg-gray-200";
-    private string _toggleSpanClass = "translate-x-0";
+    private string _toggleButtonClass = default!;
+    private string _toggleSpanClass = default!;
+
+    private void SetToggleOn()
+    {
+        _toggleButtonClass = "bg-blue-200";
+        _toggleSpanClass = "translate-x-5";
+    }
+
+    private void SetToggleOff()
+    {
+        _toggleButtonClass = "bg-gray-200";
+        _toggleSpanClass = "translate-x-0";
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (Value == ToggleState.On)
+        {
+            SetToggleOn();
+        }
+        else if(Value == ToggleState.Off)
+        {
+            SetToggleOff();
+        }
+    }
 
     private void OnButtonClick()
     {
@@ -28,19 +52,17 @@
         {
             Value = ToggleState.Off;
 
-            _toggleButtonClass = "bg-gray-200";
-            _toggleSpanClass = "translate-x-0";
+            SetToggleOff();
 
-            ValueChanged.InvokeAsync(true);
+            ValueChanged.InvokeAsync(false);
         }
         else if (Value == ToggleState.Off)
         {
             Value = ToggleState.On;
 
-            _toggleButtonClass = "bg-blue-200";
-            _toggleSpanClass = "translate-x-5";
+            SetToggleOn();
 
-            ValueChanged.InvokeAsync(false);
+            ValueChanged.InvokeAsync(true);
         }
     }
 }
