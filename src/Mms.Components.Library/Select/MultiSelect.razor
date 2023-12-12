@@ -40,8 +40,8 @@
                 {
                     @foreach (var item in items)
                     {
-                        <button @onclick="() => Toggle(item.Key)" class="flex flex-row items-center px-3 py-0.5 cursor-pointer hover:bg-gray-200 select-none">
-                            <input id="@item.Key" name="@item.Key" @bind="@item.IsChecked" type="checkbox" class="h-4 w-4 cursor-pointer rounded bg-blue-500 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                        <button @onclick="() => Toggle(item.Key)" class="flex flex-row items-center px-3 py-0.5 cursor-pointer hover:bg-gray-100 select-none">
+                            <input id="@item.Key" name="@item.Key" @bind="@item.IsChecked" type="checkbox" class="h-4 w-4 cursor-pointer rounded border-gray-300 @(ThemeState.FormControlColour)">
                             <span class="ml-3 cursor-pointer block text-sm leading-6 text-gray-900">@item.Value</span>
                         </button>
                     }

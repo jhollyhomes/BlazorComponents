@@ -2,15 +2,16 @@
 
 public class ThemeState
 {
-    public ThemeState() 
+    public ThemeState()
     {
         BackgroundColour = "bg-red-100";
-        IconColour = "text-indigo-500";
+        IconColour = "text-indigo-600";
         PrimaryLightColour = "bg-blue-100";
         PrimaryTextColour = "bg-gray-100";
 
+        FormControlColour = "accent-indigo-600";
         ButtonColour = "bg-indigo-600";
-        ButtonHoverColour = "bg-indigo-500";
+        ButtonHoverColour = "bg-indigo-700";
         ButtonTextColour = "text-gray-50";
     }
 
@@ -19,6 +20,7 @@ public class ThemeState
     public string IconColour { get; private set; } = default!;
     public string PrimaryLightColour { get; private set; } = default!;
     public string PrimaryTextColour { get; private set; } = default!;
+    public string FormControlColour { get; private set; } = default!;
     public string ButtonColour { get; private set; } = default!;
     public string ButtonHoverColour { get; private set; } = default!;
     public string ButtonTextColour { get; private set; } = default!;
@@ -35,6 +37,12 @@ public class ThemeState
         IconColour = value;
         NotifyStateChanged();
     }
+    public void SetFormControlColour(string value)
+    {
+        FormControlColour = value;
+        NotifyStateChanged();
+    }
+    
     public void SetPrimaryLightColour(string value)
     {
         PrimaryLightColour = value;

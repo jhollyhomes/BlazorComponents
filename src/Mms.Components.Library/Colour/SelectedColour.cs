@@ -26,6 +26,7 @@ public class SelectedColour
                 ColourTypes.Background => "bg-white",
                 ColourTypes.HoverBackground => "hover:bg-white",
                 ColourTypes.HoverText => "hover:text-white",
+                ColourTypes.Control => "accent-white",
                 _ => string.Empty
             };
         }
@@ -38,6 +39,7 @@ public class SelectedColour
                 ColourTypes.Background => "bg-black",
                 ColourTypes.HoverBackground => "hover:bg-black",
                 ColourTypes.HoverText => "hover:text-black",
+                ColourTypes.Control => "accent-black",
                 _ => string.Empty
             };
         }
@@ -48,6 +50,7 @@ public class SelectedColour
             ColourTypes.Background => string.Concat("bg-", Colour, "-", Shade),
             ColourTypes.HoverBackground => string.Concat("hover:bg-", Colour, "-", Shade),
             ColourTypes.HoverText => string.Concat("hover:text-", Colour, "-", Shade),
+            ColourTypes.Control => string.Concat("accent-", Colour, "-", Shade),
             _ => string.Empty
         };
     }

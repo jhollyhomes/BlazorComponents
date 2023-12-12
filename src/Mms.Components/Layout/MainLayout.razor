@@ -4,8 +4,10 @@
 @implements IDisposable
 
 <CascadingValue Value="@ThemeState">
-    <div class="h-full container mx-auto @(ThemeState.BackgroundColour)">
-        @Body
+    <div class="h-full @(ThemeState.BackgroundColour)">
+        <div class="h-full container mx-auto">
+            @Body
+        </div>
     </div>
 </CascadingValue>
 

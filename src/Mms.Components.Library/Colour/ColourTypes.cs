@@ -5,4 +5,5 @@ public enum ColourTypes
     Background = 2,
     HoverBackground = 3,
     HoverText = 4,
+    Control = 5,
 }
