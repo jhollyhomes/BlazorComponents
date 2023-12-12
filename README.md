@@ -1,4 +1,4 @@
-# BlazorComponents
+# Blazor Components
 Some components for blazor written using tailwind css.
 
 The controls are tightly coupled to tailwind but you could port to Bootstrap or whatever.
