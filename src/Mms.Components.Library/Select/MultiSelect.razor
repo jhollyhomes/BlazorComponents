@@ -1,6 +1,7 @@
 ﻿<div @onclick="() => ClosePopup()" class="@(_dropdownVisible ? "visible" : "invisible") fixed z-20 inset-0 transition-opacity"></div>
 
 <div class="relative w-full">
+
     <button type="button" @onclick="() => TogglePopup()" class="flex items-center w-full bg-white border shadow-sm border-gray-300 rounded-md p-1 hover:bg-blue-50">
         <span class="block truncate">
             @if (items != null)
@@ -49,4 +50,5 @@
 
         </div>
     }
+
 </div>

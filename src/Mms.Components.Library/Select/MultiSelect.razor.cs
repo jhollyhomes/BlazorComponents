@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Mms.Components.Library.Date;
 
 namespace Mms.Components.Library.Select;
 
@@ -10,7 +9,8 @@ public partial class MultiSelect
 
     private const int MAX_ITEMS_TO_DISPLAY = 3;
     private bool _dropdownVisible = false;
-    void Toggle(string key)
+
+    private void Toggle(string key)
     {
         var item = items.FirstOrDefault(x => x.Key == key);
         if (item != null)
@@ -19,10 +19,10 @@ public partial class MultiSelect
         }
     }
 
-    void ClosePopup()
+    private void ClosePopup()
     {
         _dropdownVisible = false;
     }
 
-    void TogglePopup() => _dropdownVisible = !_dropdownVisible;
+    private void TogglePopup() => _dropdownVisible = !_dropdownVisible;
 }

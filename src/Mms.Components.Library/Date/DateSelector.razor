@@ -33,11 +33,11 @@
                 @switch (_dateSelectorView)
                 {
                     case DateSelectorView.Days:
-                        <DaySelectorMonthHeader DateChanged="DateViewUpdated" MonthYearChange="MonthSelectedOpen" Month="ViewMonth" Year="ViewYear" />
+                        <DaySelectorMonthHeader DateChanged="DateViewUpdated" MonthYearChange="MonthSelectedOpen" Month="_viewMonth" Year="_viewYear" />
                         <div class="border-t mx-1 mt-1"></div>
                         <DaySelectorHeader />
                         <div class="border-t mx-1 mb-1"></div>
-                        <DaySelectorDays Month="ViewMonth" Year="ViewYear" SelectedDate="Date" SelectedDateChanged="SelectedDateChanged" />
+                        <DaySelectorDays Month="_viewMonth" Year="_viewYear" SelectedDate="Date" SelectedDateChanged="SelectedDateChanged" />
                         <div class="border-t mx-1 my-1"></div>
                         <div class="flex flex-row gap-x-2 mx-1 mt-1 justify-end">
                             <button @onclick="() => ClearDate()" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Clear</button>
@@ -47,7 +47,7 @@
                     case DateSelectorView.Years:
                     case DateSelectorView.Months:
                         <MonthSelector DateSelectorViewState="_dateSelectorView" DateChanged="DateViewUpdated" ClosePopup="ClosePopup"
-                                       CloseMonthSelected="MonthSeletedClose" Month="ViewMonth" Year="ViewYear" SelectedDate="Date" />
+                                       CloseMonthSelected="MonthSeletedClose" Month="_viewMonth" Year="_viewYear" SelectedDate="Date" />
                         break;
                 }
 
@@ -62,63 +62,61 @@
     [Parameter]
     public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
-    DateSelectorView _dateSelectorView { get; set; } = DateSelectorView.Days;
-
-    public int ViewMonth { get; set; }
-    public int ViewYear { get; set; }
-
-    bool _dropdownVisible = false;
+    private DateSelectorView _dateSelectorView = DateSelectorView.Days;
+    private int _viewMonth;
+    private int _viewYear;
+    private bool _dropdownVisible = false;
 
     protected override void OnParametersSet()
     {
-        ViewMonth = Date.Month;
-        ViewYear = Date.Year;
+        _viewMonth = Date.Month;
+        _viewYear = Date.Year;
     }
 
-    void DateViewUpdated(DateOnly value)
+    private void DateViewUpdated(DateOnly value)
     {
-        ViewMonth = value.Month;
-        ViewYear = value.Year;
+        _viewMonth = value.Month;
+        _viewYear = value.Year;
 
         _dateSelectorView = DateSelectorView.Days;
     }
 
-    void SelectedDateChanged(DateOnly value)
+    private void SelectedDateChanged(DateOnly value)
     {
         Date = value;
 
-        ViewMonth = value.Month;
-        ViewYear = value.Year;
+        _viewMonth = value.Month;
+        _viewYear = value.Year;
 
         _dropdownVisible = false;
     }
 
-    void ClosePopup()
+    private void ClosePopup()
     {
         _dropdownVisible = false;
         _dateSelectorView = DateSelectorView.Days;
     }
 
-    void TogglePopup() => _dropdownVisible = !_dropdownVisible;
+    private void TogglePopup() => _dropdownVisible = !_dropdownVisible;
 
-    void ClearDate()
+    private void ClearDate()
     {
         Date = DateOnly.MinValue;
         var today = DateTime.Today;
 
-        ViewMonth = today.Month;
-        ViewYear = today.Year;
+        _viewMonth = today.Month;
+        _viewYear = today.Year;
 
         _dateSelectorView = DateSelectorView.Days;
         _dropdownVisible = false;
     }
 
-    void MonthSelectedOpen()
+    private void MonthSelectedOpen()
     {
         _dateSelectorView = DateSelectorView.Months;
     }
 
-    void MonthSeletedClose()
+    private void MonthSeletedClose()
     {
         _dateSelectorView = DateSelectorView.Days;
     }

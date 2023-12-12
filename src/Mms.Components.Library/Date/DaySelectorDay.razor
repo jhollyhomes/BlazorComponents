@@ -28,7 +28,7 @@ else
     [Parameter]
     public EventCallback<int> SelectDay { get; set; }
 
-    public void Select(int day)
+    private void Select(int day)
     {
         SelectDay.InvokeAsync(day);
     }

@@ -52,7 +52,7 @@
     [Parameter]
     public EventCallback<DateOnly> SelectedDateChanged { get; set; }
 
-    public async Task SelectDayInMonth(int value)
+    private async Task SelectDayInMonth(int value)
     {
         DateOnly newSelectedDate = new DateOnly(Year, Month, value);
 

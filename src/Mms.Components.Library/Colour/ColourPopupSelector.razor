@@ -1,35 +1,33 @@
-﻿<div class="w-full absolute top-[10.5] z-20 origin-top rounded-md bg-white text-center py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
-     tabindex="-1">
-
+﻿<div class="w-full absolute top-[10.5] z-20 origin-top rounded-md bg-white text-center py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" tabindex="-1">
     <div class="flex flex-col justify-center">
         
         <div class="flex flex-row justify-between mx-2">
 
-        <div class="mr-0.5">
-            <button @onclick="() => SelectedWhiteColour()" class="bg-white w-5 h-5 border border-gray-400 shadow-xl">
-            </button>
-            <button @onclick="() => SelectedBlackColour()" class="bg-black w-5 h-5 border border-gray-400 shadow-xl">
-            </button>
-        </div>
-
-        @foreach (var colour in colours)
-        {
-            <div>
-                @foreach (var shade in shades)
-                {
-                    <button @onclick="() => SelectedColour(colour, shade)"
-                            class="bg-@(colour)-@(shade) w-5 h-5 border border-gray-400 shadow-xl">
-                    </button>
-                }
+            <div class="mr-0.5">
+                <button @onclick="() => SelectedWhiteColour()" class="bg-white w-5 h-5 border border-gray-400 shadow-xl">
+                </button>
+                <button @onclick="() => SelectedBlackColour()" class="bg-black w-5 h-5 border border-gray-400 shadow-xl">
+                </button>
             </div>
-        }
+
+            @foreach (var colour in colours)
+            {
+                <div>
+                    @foreach (var shade in shades)
+                    {
+                        <button @onclick="() => SelectedColour(colour, shade)"
+                                class="bg-@(colour)-@(shade) w-5 h-5 border border-gray-400 shadow-xl">
+                        </button>
+                    }
+                </div>
+            }
         </div>
 
         <div class="flex flex-row mx-2 mt-1 justify-end">
             <button @onclick="OnClose" class="bg-blue-50 rounded border px-2 py-0.5 text-xs text-gray-600 hover:bg-blue-100">Close</button>
         </div>
-    </div>
 
+    </div>
 </div>
 
 @code {
@@ -40,19 +38,19 @@
     [Parameter, EditorRequired]
     public EventCallback<SelectedColour> OnColourSelected { get; set; }
 
-    public void SelectedColour(string colour, string shade)
+    private void SelectedColour(string colour, string shade)
     {
-        OnColourSelected.InvokeAsync(new SelectedColour(colour, shade)).Wait();
+        OnColourSelected.InvokeAsync(new SelectedColour(colour, shade));
     }
 
-    public void SelectedWhiteColour()
+    private void SelectedWhiteColour()
     {
-        OnColourSelected.InvokeAsync(new SelectedColour("white")).Wait();
+        OnColourSelected.InvokeAsync(new SelectedColour("white"));
     }
 
-    public void SelectedBlackColour()
+    private void SelectedBlackColour()
     {
-        OnColourSelected.InvokeAsync(new SelectedColour("black")).Wait();
+        OnColourSelected.InvokeAsync(new SelectedColour("black"));
     }
 
     private List<string> colours = new List<string>()
@@ -88,4 +86,3 @@
         "950",
     };
 }
-

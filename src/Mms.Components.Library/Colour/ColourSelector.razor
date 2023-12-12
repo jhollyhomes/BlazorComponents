@@ -5,32 +5,36 @@
         <button @onclick="TogglePopup" class="bg-@(CurrentColour.RemoveTailwindPrefix()) shadow-xl border border-gray-300 
                 hover:outline-none hover:ring-2 hover:ring-blue-200 hover:ring-offset-2 w-5 h-5">
         </button>
+
         @ChildContent
     </div>
+
     @if (_dropdownVisible)
     {
         <ColourPopupSelector OnClose="ClosePopup" OnColourSelected="ColourSelected" />
     }
+
 </div>
-
-
 
 @code {
 
     [Parameter]
     public RenderFragment ChildContent { get; set; } = default!;
+
     [Parameter]
     public string CurrentColour { get; set; } = default!;
+
     [Parameter]
     public ColourTypes ColourType { get; set; } = ColourTypes.Text;
+
     [Parameter]
-    public Action<string> ColourChanged { get; set; } = default!;
+    public EventCallback<string> ColourChanged { get; set; } = default!;
 
-    bool _dropdownVisible = false;
+    private bool _dropdownVisible = false;
 
-    void TogglePopup() => _dropdownVisible = !_dropdownVisible;
+    private void TogglePopup() => _dropdownVisible = !_dropdownVisible;
 
-    void ClosePopup() => _dropdownVisible = false;
+    private void ClosePopup() => _dropdownVisible = false;
 
     private void ColourSelected(SelectedColour selectedColour)
     {
@@ -38,6 +42,6 @@
 
         _dropdownVisible = false;
 
-        ColourChanged.Invoke(colour);
+        ColourChanged.InvokeAsync(colour);
     }
 }

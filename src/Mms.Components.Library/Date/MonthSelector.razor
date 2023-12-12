@@ -134,26 +134,26 @@
         Year += 12;
     }
 
-    void MonthClick(int value)
+    private void MonthClick(int value)
     {
         Month = value;
 
         DateChanged.InvokeAsync(new DateOnly(Year, Month, 1));
     }
 
-    void YearClick(int value)
+    private void YearClick(int value)
     {
         Year = value;
 
         DateSelectorViewState = DateSelectorView.Months;
     }
 
-    void Close()
+    private void Close()
     {
         ClosePopup.InvokeAsync();
     }
 
-    void Back()
+    private void Back()
     {
         if (DateSelectorViewState == DateSelectorView.Months)
         {

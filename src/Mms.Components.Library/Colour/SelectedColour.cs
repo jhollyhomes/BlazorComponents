@@ -7,10 +7,12 @@ public class SelectedColour
         Colour = colour;
         Shade = shade;
     }
+
     public SelectedColour(string colour)
     {
         Colour = colour;
     }
+
     public string Colour { get; set; } = default!;
     public string Shade { get; set; } = default!;
 
