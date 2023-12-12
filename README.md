@@ -1,13 +1,15 @@
 # BlazorComponents
-Some components for blazor written using tailwind css
+Some components for blazor written using tailwind css.
 
-using blazor & tailwind created components for general use
+The controls are tightly coupled to tailwind but you could port to Bootstrap or whatever.
 
 - Multi select drop down component
 - Date picker component
 - Colour picker
 - Toggle button
-  
+
+Uses singleton state object as a Cascading Parameter that holds the state for colours.  The colours can be changed real time using the colour control.
+
 **All Controls** use a bool field to show/hide then creates a hidden div to deal with close on button click outside.
 
 - [X] Date picker component
