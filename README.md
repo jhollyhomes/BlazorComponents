@@ -36,7 +36,7 @@ Uses singleton state object as a Cascading Parameter that holds the state for co
 - ability to customise colours quickly
 - Hides items after set number (in this case 3) and display Items Selected X message.
 
-<img src="[https://your-image-url.type](https://github.com/jhollyhomes/BlazorComponents/assets/6323972/f996c6f9-1924-48c8-950b-2193f07c521c)" width="100">
+<img src="https://github.com/jhollyhomes/BlazorComponents/assets/6323972/f996c6f9-1924-48c8-950b-2193f07c521c" width="100">
 
 ## Date control
 - ability to customise colours quickly
