@@ -14,9 +14,6 @@
         <MultiSelect items="multiSelectItems2" />
     </div>
 
-    <div class="w-96 my-5">
-        <DateSelector />
-    </div>
 
     <div class="w-96 my-5">
         <DateSelector Date="_initialDate" />
@@ -29,7 +26,11 @@
     </div>
 
     <div class="w-96 my-5">
-        <ColourSelector ColourChanged="SetColourValue" CurrentColour="@ThemeState.BackgroundColour" ColourType="ColourTypes.Background" >
+        <DateSelector />
+    </div>
+
+    <div class="w-96 my-5">
+        <ColourSelector ColourChanged="SetColourValue" CurrentColour="@ThemeState.BackgroundColour" ColourType="ColourTypes.Background">
             <span class="ml-3 text-sm font-normal">Background colour</span>
         </ColourSelector>
     </div>

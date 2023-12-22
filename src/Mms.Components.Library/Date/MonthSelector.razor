@@ -5,9 +5,11 @@
     case DateSelectorView.Months:
             <div class="flex flex-row justify-between p-1">
                 <DateSelectorNavigateLeft ButtonClick="PreviousYear" />
+
                 <DateSelectorNavigationHeader ButtonClick="ChangeYear">
                     <span>@(Year.ToString("D4"))</span>
                 </DateSelectorNavigationHeader>
+
                 <DateSelectorNavigateRight ButtonClick="NextYear" />
             </div>
 
