@@ -11,4 +11,8 @@
     <PackageReference Include="Bogus" Version="35.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mms.Components.Shared\Mms.Components.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

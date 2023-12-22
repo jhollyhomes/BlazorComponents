@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using Mms.Components.Api.Models;
+using Mms.Components.Shared;
 
 namespace Mms.Components.Api.FakeServices;
 

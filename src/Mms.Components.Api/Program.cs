@@ -1,5 +1,5 @@
 using Mms.Components.Api.FakeServices;
-using Mms.Components.Api.Models;
+using Mms.Components.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 

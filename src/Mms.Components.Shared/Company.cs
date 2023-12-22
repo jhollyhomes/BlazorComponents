@@ -1,4 +1,4 @@
-﻿namespace Mms.Components.Api.Models;
+﻿namespace Mms.Components.Shared;
 
 public class Company
 {
