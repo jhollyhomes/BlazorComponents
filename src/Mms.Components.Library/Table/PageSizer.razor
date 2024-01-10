@@ -1,0 +1,30 @@
+﻿<div class="flex">
+    <label for="pageSize" class="my-2 pr-1 text-sm font-normal text-gray-600">Page size</label>
+    <select class="m-1 px-2 py-1 w-14 block border border-gray-300 text-sm text-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            value="@PageSize" @onchange="@HandleChange">
+        <option>5</option>
+        <option>10</option>
+        <option>15</option>
+        <option>20</option>
+        <option>50</option>
+    </select>
+</div>
+
+@code
+{
+    [Parameter]
+    public int PageSize { get; set; }
+
+    [Parameter]
+    public EventCallback<int> PageSizeChanged { get; set; }
+
+    public void HandleChange(ChangeEventArgs args)
+    {
+        var value = args.Value?.ToString();
+
+        if (int.TryParse(value, out int pageSize))
+        {
+            PageSizeChanged.InvokeAsync(PageSize);
+        }
+    }
+}

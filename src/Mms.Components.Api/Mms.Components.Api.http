@@ -1,6 +1,0 @@
-@Mms.Components.Api_HostAddress = http://localhost:5269
-
-GET {{Mms.Components.Api_HostAddress}}/api/company/
-Accept: application/json
-
-###

@@ -12,6 +12,7 @@ public partial class MultiSelect
     public List<DropDownItem> items { get; set; } = default!;
 
     private const int MAX_ITEMS_TO_DISPLAY = 3;
+
     private bool _dropdownVisible = false;
 
     private void Toggle(string key)
